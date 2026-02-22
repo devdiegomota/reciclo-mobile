@@ -170,17 +170,23 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
                             background: 'linear-gradient(135deg, rgba(23, 23, 23, 0.05) 0%, rgba(82, 82, 82, 0.05) 100%)',
                             border: '1px solid rgba(23, 23, 23, 0.1)',
                             borderRadius: '12px',
-                            padding: '1.5rem',
+                            padding: '1rem',
                             textAlign: 'center'
                         }}>
-                            <h3 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '1.5rem', color: 'var(--primary-color)' }}>
-                                Nossa Proposta
-                            </h3>
-
-                            <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '2rem' }}>
-                                <div>
-                                    <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Valor Ofertado</p>
-                                    <p style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--success-color)' }}>
+                            <div style={{ 
+                                display: 'flex', 
+                                justifyContent: 'space-between', 
+                                alignItems: 'center', 
+                                marginBottom: '1rem',
+                                borderBottom: '1px solid rgba(0,0,0,0.05)',
+                                paddingBottom: '0.75rem'
+                            }}>
+                                <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--primary-color)', margin: 0 }}>
+                                    Nossa Proposta
+                                </h3>
+                                <div style={{ textAlign: 'right' }}>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0' }}>Valor Ofertado</p>
+                                    <p style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--success-color)', lineHeight: 1 }}>
                                         R$ {device.quotedValue}
                                     </p>
                                 </div>
@@ -188,48 +194,50 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
 
                             <div style={{
                                 background: 'var(--surface-color)',
-                                padding: '1.25rem',
-                                borderRadius: '12px',
-                                marginBottom: '2rem',
+                                padding: '0.75rem',
+                                borderRadius: '8px',
+                                marginBottom: '1rem',
                                 display: 'flex',
                                 alignItems: 'flex-start',
-                                gap: '1rem',
+                                gap: '0.75rem',
                                 border: '1px solid var(--glass-border)',
                                 textAlign: 'left'
                             }}>
                                 <div style={{
                                     background: 'rgba(23, 23, 23, 0.05)',
-                                    padding: '0.75rem',
+                                    padding: '0.5rem',
                                     borderRadius: '50%',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     flexShrink: 0
                                 }}>
-                                    <Calendar size={24} color="var(--primary-color)" />
+                                    <Calendar size={18} color="var(--primary-color)" />
                                 </div>
                                 <div>
-                                    <p style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+                                    <p style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.1rem' }}>
                                         Previsão de Coleta e Pagamento
                                     </p>
-                                    <p style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--primary-color)', marginBottom: '0.5rem' }}>
+                                    <p style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--primary-color)', marginBottom: '0.25rem' }}>
                                         {device.paymentDeadline ? new Date(device.paymentDeadline).toLocaleDateString() : 'A definir'}
                                     </p>
-                                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                                        O pagamento será realizado no ato da coleta. A coleta está programada para ocorrer até a data acima, mas poderá ser antecipada dependendo da nossa rota.
+                                    <p style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', lineHeight: '1.3' }}>
+                                        Pagamento no ato da coleta (até a data acima).
                                     </p>
                                 </div>
                             </div>
 
                             {!showCounterInput ? (
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                                     <button
                                         onClick={() => setShowCounterInput(true)}
                                         className="btn"
                                         style={{
                                             background: 'var(--surface-color)',
                                             border: '1px solid var(--glass-border)',
-                                            color: 'var(--text-secondary)'
+                                            color: 'var(--text-secondary)',
+                                            padding: '0.6rem',
+                                            fontSize: '0.9rem'
                                         }}
                                     >
                                         Recusar
@@ -238,9 +246,18 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
                                         onClick={() => handleAction('proposal_accepted')}
                                         disabled={loading}
                                         className="btn btn-primary"
-                                        style={{ background: 'var(--success-color)', border: 'none' }}
+                                        style={{ 
+                                            background: 'var(--success-color)', 
+                                            border: 'none',
+                                            padding: '0.6rem',
+                                            fontSize: '0.9rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '0.5rem'
+                                        }}
                                     >
-                                        <CheckCircle size={18} /> Aceitar
+                                        <CheckCircle size={16} /> Aceitar
                                     </button>
                                 </div>
                             ) : (
@@ -252,14 +269,14 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
                                         value={counterOffer}
                                         onChange={(e) => setCounterOffer(e.target.value)}
                                         placeholder="Ex: Aceito por R$ 50,00 a mais..."
-                                        style={{ width: '100%', minHeight: '80px', marginBottom: '1rem', background: 'var(--surface-color)' }}
+                                        style={{ width: '100%', minHeight: '60px', marginBottom: '0.75rem', background: 'var(--surface-color)', padding: '0.5rem', fontSize: '0.9rem' }}
                                         autoFocus
                                     />
-                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                                         <button
                                             onClick={() => setShowCounterInput(false)}
                                             className="btn"
-                                            style={{ background: 'transparent', border: '1px solid var(--glass-border)' }}
+                                            style={{ background: 'transparent', border: '1px solid var(--glass-border)', padding: '0.6rem' }}
                                         >
                                             Cancelar
                                         </button>
@@ -267,6 +284,7 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
                                             onClick={() => handleAction('proposal_rejected')}
                                             disabled={loading}
                                             className="btn btn-primary"
+                                            style={{ padding: '0.6rem' }}
                                         >
                                             Enviar
                                         </button>
