@@ -188,26 +188,37 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
 
                             <div style={{
                                 background: 'var(--surface-color)',
-                                padding: '1rem',
-                                borderRadius: '8px',
+                                padding: '1.25rem',
+                                borderRadius: '12px',
                                 marginBottom: '2rem',
-                                textAlign: 'center'
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: '1rem',
+                                border: '1px solid var(--glass-border)',
+                                textAlign: 'left'
                             }}>
                                 <div style={{
-                                    display: 'inline-flex',
+                                    background: 'rgba(23, 23, 23, 0.05)',
+                                    padding: '0.75rem',
+                                    borderRadius: '50%',
+                                    display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    gap: '0.5rem',
-                                    marginBottom: '0.5rem',
-                                    fontSize: '0.9rem',
-                                    color: 'var(--text-primary)'
+                                    flexShrink: 0
                                 }}>
-                                    <Calendar size={18} color="var(--primary-color)" />
-                                    <span>Previsão de Coleta e Pagamento: <strong>{device.paymentDeadline ? new Date(device.paymentDeadline).toLocaleDateString() : 'A definir'}</strong></span>
+                                    <Calendar size={24} color="var(--primary-color)" />
                                 </div>
-                                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.5', maxWidth: '100%', margin: '0 auto' }}>
-                                    O pagamento será realizado no ato da coleta. A coleta está programada para ocorrer até a data acima, mas poderá ser antecipada dependendo da nossa rota.
-                                </p>
+                                <div>
+                                    <p style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+                                        Previsão de Coleta e Pagamento
+                                    </p>
+                                    <p style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--primary-color)', marginBottom: '0.5rem' }}>
+                                        {device.paymentDeadline ? new Date(device.paymentDeadline).toLocaleDateString() : 'A definir'}
+                                    </p>
+                                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                                        O pagamento será realizado no ato da coleta. A coleta está programada para ocorrer até a data acima, mas poderá ser antecipada dependendo da nossa rota.
+                                    </p>
+                                </div>
                             </div>
 
                             {!showCounterInput ? (
