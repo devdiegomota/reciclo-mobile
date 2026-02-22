@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { X, CheckCircle, Calendar, Smartphone, Droplets, Clock, AlertTriangle } from 'lucide-react';
+import { X, CheckCircle, Calendar, Smartphone, Droplets, Clock, AlertTriangle, DollarSign } from 'lucide-react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { toast } from 'react-hot-toast';
@@ -335,6 +335,38 @@ export default function UserDeviceModal({ device, onClose }: UserDeviceDetailsPr
                              )}
                          </div>
                      )}
+
+                    {device.status === 'paid' && (
+                        <div style={{ textAlign: 'center', padding: '2rem 1rem', background: 'var(--surface-hover)', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
+                            <div style={{
+                                background: 'rgba(16, 185, 129, 0.1)',
+                                width: '64px', height: '64px', borderRadius: '50%',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem'
+                            }}>
+                                <DollarSign size={32} color="var(--success-color)" />
+                            </div>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+                                Venda Finalizada!
+                            </h3>
+                            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+                                O pagamento foi realizado com sucesso.
+                            </p>
+                            
+                            <div style={{
+                                background: 'var(--bg-color)',
+                                padding: '1.5rem',
+                                borderRadius: '12px',
+                                display: 'inline-block',
+                                border: '1px solid var(--glass-border)',
+                                minWidth: '200px'
+                            }}>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Valor Recebido</p>
+                                <p style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--success-color)' }}>
+                                    R$ {device.quotedValue}
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
